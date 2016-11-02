@@ -13,5 +13,6 @@
     "querystring": "*",
     "deasync": "*",
     "moment": "*"
-  }
+  },
+  "repository": "wvanderp/wikibase-api"
 }
