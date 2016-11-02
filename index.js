@@ -676,13 +676,13 @@ var referencesGen = function (type, property, value) {
     }
 };
 
-var snakTypes = {
+var valueTypes = {
     "value": "value",
     "novalue": "novalue",
     "somevalue": "somevalue"
 };
 
-var valueTypes = {
+var snakTypes = {
     "string": "string",
     "item": "item",
     "coordinate": "coordinate",
