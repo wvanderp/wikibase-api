@@ -209,11 +209,13 @@ var addAliases = function (token, id, value, language) {
         language = "en"
     }
 
+
+
     var params = {
         "action": "wbsetaliases",
         "language": language,
         "id": id,
-        "set": value,
+        "add": value,
         "token": token
     };
 
@@ -474,7 +476,8 @@ var snakGenerator = function (type, value) {
             return '{"entity-type":"item","numeric-id":' + value + '}';
             break;
         case "coordinate":
-            //Statements executed when the result of expression matches valueN
+            //TODO: no need for corinates jet
+            //Statements executed when the result of expression matches value
             break;
         case "time":
             //TODO: date time doesn't work
