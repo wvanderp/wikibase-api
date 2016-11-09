@@ -156,6 +156,7 @@ var setLabel = function (token, id, value, language) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, id, language, value);
             throw resp.error.info;
         }
 
@@ -189,6 +190,7 @@ var setDescription = function (token, id, value, language) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, id, language, value);
             throw resp.error.info;
         }
 
@@ -222,6 +224,7 @@ var addAliases = function (token, id, value, language) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, id, language, value);
             throw resp.error.info;
         }
 
@@ -248,6 +251,7 @@ var getClaims = function (id) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(id);
             throw resp.error.info;
         }
 
@@ -317,6 +321,7 @@ var removeClaim = function (token, claimId) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, claimId);
             throw resp.error.info;
         }
 
@@ -380,6 +385,7 @@ var removeQualifiers = function (token, claimId, qualifierId) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, claimId, qualifierId);
             throw resp.error.info;
         }
 
@@ -441,6 +447,7 @@ var removeReferences = function (token, claimId, referenceId) {
         }
 
         if (typeof resp.error != "undefined") {
+            console.log(token, claimId, referenceId);
             throw resp.error.info;
         }
 
