@@ -303,12 +303,10 @@ var addClaim = function (token, entity, property, value, snaktype) {
 };
 
 
-var removeClaim = function (token, entity, claimId) {
-    entity = entity.toUpperCase();
-
+var removeClaim = function (token, claimId) {
     var params = {
         "action": "wbremoveclaims",
-        "claim": entity + "$" + claimId,
+        "claim": claimId,
         "token": token
     };
 
@@ -427,7 +425,7 @@ var setReference = function (token, claimId, snaks) {
 
 
 var removeReferences = function (token, claimId, referenceId) {
-    id = id.toUpperCase();
+    claimId = claimId.toUpperCase();
 
     var params = {
         "action": "wbremovereferences",
