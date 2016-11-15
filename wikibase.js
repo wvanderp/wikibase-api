@@ -4,109 +4,6 @@ var moment = require('moment');
 var get = require("./query.js").get;
 var post = require("./query.js").post;
 
-/**
- * Log in to the Wiki
- * @param username the user to log in as
- * @param password the password to use
- * @param callback
- */
-var login = function (username, password, callback) {
-    post({
-            action: "login",
-            lgname: username,
-            lgpassword: password
-        },
-        null,
-        function (err, data) {
-            if (err) {
-                callback(err, null);
-            }
-            switch (data.login.result) {
-                case "Success":
-                    callback(null, data.login.lgusername);
-                    break;
-                case "NeedToken":
-                    post({
-                            action: "login",
-                            lgname: username,
-                            lgpassword: password,
-                            lgtoken: data.login.token
-                        },
-                        null,
-                        function (err, data) {
-                            if (err) {
-                                callback(err, null);
-                            }
-                            if (data.login.result == "Success") {
-                                callback(null, data.login.lgusername);
-                            } else {
-                                callback(data.login.result, null);
-                            }
-                        }.bind(this));
-                    break;
-                default:
-                    callback(new Error(data.login.result), null);
-                    break;
-            }
-        }.bind(this)
-    )
-};
-
-/**
- * Logs out of the Wiki
- * @param callback
- */
-var logout = function (callback) {
-    // post to MAKE SURE it always happens
-    post({action: "logout"}, callback);
-};
-
-/**
- * Requests the current user name
- */
-var name = function (callback) {
-    userinfo(function (err, data) {
-            if (err) {
-                callback(err, null);
-            }
-            callback(null, data.name);
-        }.bind(this)
-    )
-};
-
-// a duplicate reference for tradition's sake
-var whoami = name;
-
-/**
- * Requests the current userinfo
- */
-var userinfo = function (callback) {
-    get({action: "query", meta: "userinfo"}, function (err, data) {
-        if (err) {
-            callback(err, null);
-        }
-        callback(null, data.query.userinfo);
-    }.bind(this));
-};
-
-var getToken = function () {
-    var token;
-    get({"action": "query", "meta": "tokens"}, function (err, resp) {
-        if (err) {
-            throw err;
-        }
-
-        token = resp.query.tokens.csrftoken;
-    }.bind(this));
-
-    while (token === undefined) {
-        deasync.runLoopOnce();
-    }
-
-    return token;
-};
-
-
 var newItem = function (token) {
     var params = {
         "action": "wbeditentity",
@@ -615,13 +512,6 @@ var snakTypes = {
 };
 
 module.exports = {
-    login: login,
-    logout: logout,
-    name: name,
-    whoami: whoami,
-    userinfo: userinfo,
-    getToken: getToken,
-
     getClaims: getClaims,
     newItem: newItem,
     setLabel: setLabel,

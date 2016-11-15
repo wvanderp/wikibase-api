@@ -2,20 +2,18 @@
 var settings = require("./settings.js");
 var wikibase = require("./wikibase.js");
 var query = require("./query.js").get;
-//var mediawiki = require("./mediawiki.js");
+var mediawiki = require("./mediawiki.js");
 
 module.exports = {
+    //settings
     version: settings.version,
     settings: settings,
+
+    //query
     get: query.get,
     post: query.post,
-    login: wikibase.login,
-    logout: wikibase.logout,
-    name: wikibase.name,
-    whoami: wikibase.whoami,
-    userinfo: wikibase.userinfo,
-    getToken: wikibase.getToken,
 
+    //wikibase
     getClaims: wikibase.getClaims,
     newItem: wikibase.newItem,
     setLabel: wikibase.setLabel,
@@ -36,5 +34,18 @@ module.exports = {
     vt: wikibase.valueTypes,
     sg: wikibase.snakGenerator,
     st: wikibase.snakTypes,
-    rg: wikibase.referencesGen
+    rg: wikibase.referencesGen,
+
+    //wikimedia
+    "login": mediawiki.login,
+    "logout": mediawiki.logout,
+    "name": mediawiki.name,
+    "userinfo": mediawiki.userinfo,
+    "getToken": mediawiki.getToken,
+    "page": mediawiki.page,
+    "revision": mediawiki.revision,
+    "history": mediawiki.history,
+    "category": mediawiki.category,
+    "edit": mediawiki.edit,
+    "add": mediawiki.add
 };
