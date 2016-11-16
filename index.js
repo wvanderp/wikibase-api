@@ -4,7 +4,7 @@ var wikibase = require("./wikibase.js");
 var query = require("./query.js").get;
 var mediawiki = require("./mediawiki.js");
 
-module.exports = {
+var parts = {
     //settings
     version: settings.version,
     settings: settings,
@@ -26,10 +26,10 @@ module.exports = {
     setReference: wikibase.setReference,
     removeReferences: wikibase.removeReferences,
 
-    referencesGen: wikibase.referencesGen,
-    snakTypes: wikibase.snakTypes,
-    snakGenerator: wikibase.snakGenerator,
     valueTypes: wikibase.valueTypes,
+    snakGenerator: wikibase.snakGenerator,
+    snakTypes: wikibase.snakTypes,
+    referencesGen: wikibase.referencesGen,
 
     vt: wikibase.valueTypes,
     sg: wikibase.snakGenerator,
@@ -49,3 +49,20 @@ module.exports = {
     "edit": mediawiki.edit,
     "add": mediawiki.add
 };
+
+module.exports = function(endpoint, userAgent, homepage){
+
+    settings.endpoint = endpoint;
+
+    if (typeof userAgent !== "undefined"){
+        settings.userAgent = userAgent;
+    }
+
+    if (typeof homepage !== "undefined"){
+        settings.homepage = homepage;
+    }
+
+
+    return parts
+};
+
